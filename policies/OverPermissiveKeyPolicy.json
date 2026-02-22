@@ -1,0 +1,13 @@
+{
+    "Version": "2012-10-17",
+    "Id": "OverPermissiveKMSKeyPolicy",
+    "Statement": [
+        {
+            "Sid": "AllowFullAccessToEveryone",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "kms:*",
+            "Resource": "*"
+        }
+    ]
+}

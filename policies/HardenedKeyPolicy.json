@@ -1,0 +1,36 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowKeyAdmins",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::886452736560:root"
+      },
+      "Action": "kms:*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowS3ForSpecificBucket",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "s3.amazonaws.com"
+      },
+      "Action": [
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "kms:ViaService": "s3.ap-southeast-2.amazonaws.com",    
+          "aws:SourceAccount": "886452736560"
+        },
+        "ArnLike": {
+          "aws:SourceArn": "arn:aws:s3:::audit-lab-bucket"
+        }
+      }
+    }
+  ]
+}
